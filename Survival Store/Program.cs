@@ -115,16 +115,25 @@ namespace Survival_Store
             
         }
 
-       
 
+        private static void makepurchase(Product product)
+        {
+            //write code here for what happens if you want to buy something on one of the lists, then put the writelines in the methods that call this
+            //method and then do all the calculating and wallet stuff here.
+        }
         private static void ViewWallet(Double walletamount)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("You currently have $" + Convert.ToString(walletamount));
         }
 
-        private static void ViewShoppingCart(List<Product> shoppingcart)
+        private static void ViewShoppingCart(List<Product> shoppingcartlist)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < shoppingcartlist.Count; i++)
+            {
+
+                Console.WriteLine("Product Number: " + shoppingcartlist[i].ItemNumber + " Category: " + shoppingcartlist[i].Category + " Product: " +
+                  shoppingcartlist[i].ItemName + " Price: " + shoppingcartlist[i].Price + " We currently have " + shoppingcartlist[i].NumberInStock + " in stock.");
+            }
         }
 
         private static void ViewAllProducts(List<Product> listofallproducts)
