@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +14,39 @@ namespace Survival_Store
     {
         static void Main(string[] args) 
         {
-            List<Products> listofallproducts = new List<Products>(); 
-            List<Products> shoppingcart = new List<Products>();
+            var listofallproducts = new List<Product>(); 
+            var shoppingcart = new List<Product>();
+
+            
+            // for each line in excel document I want to create a product and send that to the list. listofallproducts
+           // Product productbyline = new Product();
+
+            var productlist = File.ReadAllLines("D:/Workprograms/Projects for class/Project3-NET041815/resources/New Text Document.txt");
+            foreach (var line in productlist)
+            {
+                //split the line on tab
+               var items = line.Split('\t');
+                //take the things it splits on each line, and create a product out of each index add that product to listofallproducts
+                //for (int i = 0; i < items.Length; i++)
+               // 
+                 //outside bounds of array... fix ? 
+                    var product = new Product(items[0],  items[1], items[2], Convert.ToDouble(items[3]), Convert.ToInt32(items[4]));
+                    listofallproducts.Add(product);
+                //}
+                //add product just created to the list ? 
+                
+            }
+//write what i'm getting so i know what it's doing-- YES IT IS ACTUALLY PUTTING THE STUFF IN THE LIST THANK THE LORD 
+          //  for (int i = 0; i < listofallproducts.Count; i++)
+         //  {
+              
+        //       Console.WriteLine(listofallproducts[i].Category + listofallproducts[i].ItemNumber +
+         //          listofallproducts[i].ItemName + listofallproducts[i].Price + listofallproducts[i].NumberInStock);
+        //   }
+
+
+
+
             Random walletamount = new Random(); 
             CallMenu();
             string input = Console.ReadLine();
@@ -71,17 +104,19 @@ namespace Survival_Store
             
         }
 
+       
+
         private static void ViewWallet(Random walletamount)
         {
             throw new NotImplementedException();
         }
 
-        private static void ViewShoppingCart(List<Products> shoppingcart)
+        private static void ViewShoppingCart(List<Product> shoppingcart)
         {
             throw new NotImplementedException();
         }
 
-        private static void ViewAllProducts(List<Products> listofallproducts)
+        private static void ViewAllProducts(List<Product> listofallproducts)
         {
             throw new NotImplementedException();
         }
@@ -105,7 +140,22 @@ namespace Survival_Store
     }
 
    
-    class Products
+    class Product
     {
+        public string ItemNumber { get; set; }
+        public string Category { get; set; }
+        public string ItemName { get; set; }
+        public double Price { get; set; }
+        public int NumberInStock { get; set; }
+
+        public Product(string itemnumber, string category, string itemname, double price, int number)
+        {
+            ItemNumber = itemnumber;
+            Category = category;
+            ItemName = itemname;
+            Price = price;
+            NumberInStock = number;
+
+        }
     }
 }
