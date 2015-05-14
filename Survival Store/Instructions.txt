@@ -1,0 +1,59 @@
+﻿
+
+
+You work as a developer for a company that sells emergency supplies and they've decided to build a virtual store. 
+For some reason, all of their users are still stuck using MS-DOS, so you'll need to design the application for a text-based interface.
+ Using the inventory list in the resources folder, create an application that supports the following user stories:
+
+
+Save your project files in a directory called FirstnameLastnameP2
+
+When a customer begins the program, they should be able to interact with a text-based menu of options.
+The options should include:
+
+See all products   --(A customer should be able to see a list of all products) 
+(A customer should be able to sort the list of all products by name, category or price on all screens where a list is seen, cust should be presented with options to sort)
+(Should be able to select a product and quantity, If there is enough product in stock, the item should get added to a shopping cart and the user should receive feedback.
+ If there is not enough product in stock, the user should receive a message with that information and the item should not be added to the shopping cart. )
+See products by category  
+View shopping cart - list of items to be purchased- product ID, name, and Qty  - can remove items - can purchase all if have enough money- with message conf and money removed.
+qty should be removed from product inventory
+View wallet -(see how much money they have left in their wallet. start with random amount of money, then current money should be visible for input wallet command)
+Exit program
+
+The customer should be able to select any of these options.
+
+Each item in the list should include a product ID, the product name, a product category, and whether or not it is in stock. 
+You will need to come up with a system to generate appropriate IDs.
+
+
+
+Challenge
+
+A users should be given the option to 'sign in' as an admin
+
+When the program is first started, users should be presented with the option to sign in as an admin. 
+If this option is selected, users will need to enter a password. If the password matches a password stored in the system, the user is presented with an admin interface.
+
+An admin should be able to interact with a menu of options
+
+The options should include:
+
+See all products
+Search for a product
+See purchased items
+See popular items
+Exit program
+An admin should be able to see a list of inventory that can be sorted by name, category or number of items
+
+An admin should be able to search for items by name
+
+bonus: The search should be case- and whitespace-insensitive
+
+An admin should be able to see a list of purchased items
+
+After 5 purchases have been made, an admin should be able to see a list of the most popular items
+
+Make your own store with a different set of inventory
+
+**Changes made to inventory should be reflected in calls to inventory-related features* **Classes, methods and inheritance should be used to separate concerns and organize data*
