@@ -10,7 +10,7 @@ namespace Survival_Store
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             List<Products> listofallproducts = new List<Products>(); 
             List<Products> shoppingcart = new List<Products>();
@@ -18,9 +18,10 @@ namespace Survival_Store
             CallMenu();
             string input = Console.ReadLine();
             
-            while (input != "q" || input != "Q")
+            while (input != null && input.ToLower() != "q")
             {
                switch (input)
+
             {
                 case "A":
                 case "a":
@@ -47,15 +48,32 @@ namespace Survival_Store
                 case "W":
                 case "w":
                 {
+                    ViewWallet(walletamount);
+                    break;
+                }
+                default:
 
+                {
+                    Console.WriteLine("Sorry, I didn't understand you");
                     break;
                 }
 
             }
+               
                 input = Console.ReadLine();
+            }
+
+            if (input == "q" || input == "Q")
+            {
+                Environment.Exit(0);
             }
            
             
+        }
+
+        private static void ViewWallet(Random walletamount)
+        {
+            throw new NotImplementedException();
         }
 
         private static void ViewShoppingCart(List<Products> shoppingcart)
