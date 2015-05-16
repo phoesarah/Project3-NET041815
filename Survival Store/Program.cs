@@ -199,27 +199,58 @@ namespace Survival_Store
                     case "1":
 
                     {
-                       listofallproducts.OrderBy(x => x.Category);
+                        
+                      var categorylist = listofallproducts.OrderBy(x => x.Category);
+
+                        foreach (var prod in categorylist)
+                        {
+                            Console.WriteLine("Product Number: " + prod.ItemNumber + " Category: " + prod.Category + " Product: " +
+                              prod.ItemName + " Price: " + prod.Price + " We currently have " + prod.NumberInStock + " in stock.");
+                        }
+                            
+                        
+                        
                       break;
                     }
                     case "2":
                     {
-                        listofallproducts.OrderBy(x => x.ItemName);
+                       var itemnamelist = listofallproducts.OrderBy(x => x.ItemName);
+
+                         foreach (var prod in itemnamelist)
+                        {
+                            Console.WriteLine("Product Number: " + prod.ItemNumber + " Category: " + prod.Category + " Product: " +
+                              prod.ItemName + " Price: " + prod.Price + " We currently have " + prod.NumberInStock + " in stock.");
+                        }
                         break;
                     }
                     case "3":
                     {
-                        listofallproducts.OrderBy(x => x.Price);
+                        var pricelist = listofallproducts.OrderBy(x => x.Price);
+                        foreach (var prod in pricelist)
+                        {
+                            Console.WriteLine("Product Number: " + prod.ItemNumber + " Category: " + prod.Category + " Product: " +
+                              prod.ItemName + " Price: " + prod.Price + " We currently have " + prod.NumberInStock + " in stock.");
+                        }
                         break;
                     }
                     case "4":
                     {
-                        listofallproducts.OrderBy(x => x.NumberInStock);
+                       var numlist = listofallproducts.OrderBy(x => x.NumberInStock);
+                        foreach (var prod in numlist)
+                        {
+                            Console.WriteLine("Product Number: " + prod.ItemNumber + " Category: " + prod.Category + " Product: " +
+                              prod.ItemName + " Price: " + prod.Price + " We currently have " + prod.NumberInStock + " in stock.");
+                        }
                         break;
                     }
                     case "5":
                     {
-                        listofallproducts.OrderBy(x => x.ItemNumber);
+                        var itemnumlist = listofallproducts.OrderBy(x => x.ItemNumber);
+                        foreach (var prod in itemnumlist)
+                        {
+                            Console.WriteLine("Product Number: " + prod.ItemNumber + " Category: " + prod.Category + " Product: " +
+                              prod.ItemName + " Price: " + prod.Price + " We currently have " + prod.NumberInStock + " in stock.");
+                        }
                         break;
                     }
                     default:
@@ -231,7 +262,7 @@ namespace Survival_Store
 
         }
 
-       
+        
 
         private static void ListProducts(List<Product> listofallproducts)
         {
