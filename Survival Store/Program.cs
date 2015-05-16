@@ -43,16 +43,16 @@ namespace Survival_Store
                switch (input)
 
             {
-                case "A":
-                case "a":
+                case "L":
+                case "l":
                 {
                     ViewAllProducts(listofallproducts);
                     break;  
                 }
 
                     break;
-                case "P":
-                case "p":
+                case "C":
+                case "c":
                 {
                     Console.WriteLine("Our categories are as follows: ");
                     Console.WriteLine("food");
@@ -74,8 +74,8 @@ namespace Survival_Store
                     break; 
                 }
                     
-                case "C":
-                case "c":
+                case "S":
+                case "s":
                 {
                     ViewShoppingCart(shoppingcart);
                     break;
@@ -178,7 +178,7 @@ namespace Survival_Store
             ListProducts(listofallproducts);
              
 
-            Console.WriteLine("To buy a product, please press Type 'B', to categorize all products, please press 'C', If not, please press enter");
+            Console.WriteLine("To buy a product, please press Type 'B', to sort all products, please press 'C', If not, please press enter");
             string input = Console.ReadLine();
             if (input.ToUpper() == "B")
             {
@@ -195,27 +195,31 @@ namespace Survival_Store
                 string sortby = Console.ReadLine();
                 switch (sortby)
                 {
+                        //I have to make all of these go through and write the line..for all products. 
                     case "1":
 
                     {
-                        listofallproducts.Sort();
-
-                        break;
+                       listofallproducts.OrderBy(x => x.Category);
+                      break;
                     }
                     case "2":
                     {
+                        listofallproducts.OrderBy(x => x.ItemName);
                         break;
                     }
                     case "3":
                     {
+                        listofallproducts.OrderBy(x => x.Price);
                         break;
                     }
                     case "4":
                     {
+                        listofallproducts.OrderBy(x => x.NumberInStock);
                         break;
                     }
                     case "5":
                     {
+                        listofallproducts.OrderBy(x => x.ItemNumber);
                         break;
                     }
                     default:
@@ -226,6 +230,8 @@ namespace Survival_Store
            
 
         }
+
+       
 
         private static void ListProducts(List<Product> listofallproducts)
         {
@@ -266,9 +272,9 @@ namespace Survival_Store
         private static void CallMenu()
         {
             
-            Console.WriteLine("If you would like to view all products, please type 'A'");
-            Console.WriteLine("If you would like to view products by category, please type 'P'");
-            Console.WriteLine("If you would like to view your shopping cart, please type 'C'");
+            Console.WriteLine("If you would like to list all products, please type 'L'");
+            Console.WriteLine("If you would like to view products by category, please type 'C'");
+            Console.WriteLine("If you would like to view your shopping cart, please type 'S'");
             Console.WriteLine("If you would like to view your wallet, please type 'W'");
             Console.WriteLine("To quit, type'Q");
         }
