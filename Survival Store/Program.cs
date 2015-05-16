@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,34 +13,27 @@ namespace Survival_Store
 {
     class Program
     {
+       static List<Product> listofallproducts = new List<Product>();
+        static List<Product> shoppingcart = new List<Product>();
+        private static double walletamount;
+        public static Product producttopurchase = null;
         static void Main(string[] args) 
         {
-            var listofallproducts = new List<Product>(); 
-            var shoppingcart = new List<Product>();
+            
             var productlist = File.ReadAllLines("D:/Workprograms/Projects for class/Project3-NET041815/resources/New Text Document.txt");
-            
-            // for each line in excel document I want to create a product and send that to the list. listofallproducts
-            
+            walletamount = 3000; 
+
+            // for each line in document create a product and send that to the listofallproducts
             foreach (var line in productlist)
             {
                 //split the line on tab
                var items = line.Split('\t');
                 //take the things it splits on each line, and create a product out of each index add that product to listofallproducts
-                //for (int i = 0; i < items.Length; i++)
-              
                var product = new Product(items[0],  items[1], items[2], Convert.ToDouble(items[3]), Convert.ToInt32(items[4]));
-                    listofallproducts.Add(product);
+               listofallproducts.Add(product);
             }
-
-//write what i'm getting so i know what it's doing-- YES IT IS ACTUALLY PUTTING THE STUFF IN THE LIST THANK THE LORD 
-//            for (int i = 0; i < listofallproducts.Count; i++)
-//          {
-              
-//             Console.WriteLine(listofallproducts[i].Category + listofallproducts[i].ItemNumber +
-//               listofallproducts[i].ItemName + listofallproducts[i].Price + listofallproducts[i].NumberInStock);
-//          }
-
-            double walletamount = 3000; //make into a random later
+            //make into a random later
+            
             Console.WriteLine("Welcome, customer!");
             CallMenu();
             string input = Console.ReadLine();
@@ -115,11 +109,49 @@ namespace Survival_Store
             
         }
 
+      //  private static void makepurchase();
+     //   {
+            //to make purchase in your shopping cart and deduct the money and items in list. 
+       // }
+        
 
-        private static void makepurchase(Product product)
+
+        private static void pickproducttobuy(List<Product> listofallproducts)
         {
-            //write code here for what happens if you want to buy something on one of the lists, then put the writelines in the methods that call this
-            //method and then do all the calculating and wallet stuff here.
+            
+            Console.WriteLine("To make a purchase please type in the product number of the item you would like to purchase");
+            string purchasenumber = Console.ReadLine();
+            Product  producttopurchase = null;
+            for (int i = 0; i < listofallproducts.Count; i++)
+            {
+                if (listofallproducts[i].ItemNumber == purchasenumber)
+                {
+                    Console.WriteLine("Type 'Y' to confirm you would like to purchase: " +
+                                      listofallproducts[i].ItemNumber + " Category: " +
+                                      listofallproducts[i].Category + " Product: " +
+                                      listofallproducts[i].ItemName + " Price: " + listofallproducts[i].Price +
+                                      " We currently have " + listofallproducts[i].NumberInStock + " in stock.");
+                    string confirmation = Console.ReadLine();
+                    if (confirmation.ToLower() == "y")
+                    {
+                        producttopurchase = listofallproducts[i];
+                        AddtoShoppingCart(producttopurchase);
+                        break;
+                    }
+                   
+
+                }
+
+                
+
+            }
+
+                
+        }
+
+        private static void AddtoShoppingCart(Product producttopurchase)
+        {
+            shoppingcart.Add(producttopurchase);
         }
         private static void ViewWallet(Double walletamount)
         {
@@ -128,22 +160,81 @@ namespace Survival_Store
 
         private static void ViewShoppingCart(List<Product> shoppingcartlist)
         {
+            if(shoppingcartlist != null)
             for (int i = 0; i < shoppingcartlist.Count; i++)
             {
 
                 Console.WriteLine("Product Number: " + shoppingcartlist[i].ItemNumber + " Category: " + shoppingcartlist[i].Category + " Product: " +
                   shoppingcartlist[i].ItemName + " Price: " + shoppingcartlist[i].Price + " We currently have " + shoppingcartlist[i].NumberInStock + " in stock.");
             }
+            else
+            {
+                Console.WriteLine("Sorry, you don't have anything in your cart");
+            }
         }
 
         private static void ViewAllProducts(List<Product> listofallproducts)
         {
-             for (int i = 0; i < listofallproducts.Count; i++)
-         {
+            ListProducts(listofallproducts);
+             
 
-             Console.WriteLine("Product Number: " + listofallproducts[i].ItemNumber + " Category: " + listofallproducts[i].Category + " Product: " +
-               listofallproducts[i].ItemName + " Price: " + listofallproducts[i].Price + " We currently have " + listofallproducts[i].NumberInStock + " in stock.");
-          }
+            Console.WriteLine("To buy a product, please press Type 'B', to categorize all products, please press 'C', If not, please press enter");
+            string input = Console.ReadLine();
+            if (input.ToUpper() == "B")
+            {
+                pickproducttobuy(listofallproducts);
+            }
+            else if (input.ToUpper() == "C")
+            {
+                Console.WriteLine("Please type the option of which you would like to sort by: ");
+                Console.WriteLine("1:   Category");
+                Console.WriteLine("2:   Item Name");
+                Console.WriteLine("3:   Price");
+                Console.WriteLine("4:   Number we have in stock");
+                Console.WriteLine("5:   Item Number");
+                string sortby = Console.ReadLine();
+                switch (sortby)
+                {
+                    case "1":
+
+                    {
+                        listofallproducts.Sort();
+
+                        break;
+                    }
+                    case "2":
+                    {
+                        break;
+                    }
+                    case "3":
+                    {
+                        break;
+                    }
+                    case "4":
+                    {
+                        break;
+                    }
+                    case "5":
+                    {
+                        break;
+                    }
+                    default:
+                        break;
+                }
+
+            }
+           
+
+        }
+
+        private static void ListProducts(List<Product> listofallproducts)
+        {
+            for (int i = 0; i < listofallproducts.Count; i++)
+            {
+
+                Console.WriteLine("Product Number: " + listofallproducts[i].ItemNumber + " Category: " + listofallproducts[i].Category + " Product: " +
+                  listofallproducts[i].ItemName + " Price: " + listofallproducts[i].Price + " We currently have " + listofallproducts[i].NumberInStock + " in stock.");
+            }
         }
 
         private static void ViewProductsByCategory(List<Product> listofallproducts, string input)
@@ -183,9 +274,9 @@ namespace Survival_Store
         }
         
     }
-
+    // if i make a customer class that has a wallet and a shopping cart, and then pass that class. 
    
-    class Product
+    public class Product
     {
         public string ItemNumber { get; set; }
         public string Category { get; set; }
